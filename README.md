@@ -1,3 +1,7 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FAppleHolic%2Faudioset_augmentor)](https://hits.seeyoufarm.com)
+
+
+
 ### Audio Augmentation using AudioSet
 
 - AudioSet
@@ -13,8 +17,13 @@
 #### How to Use
 
 - Installation
+  - install ffmpeg version 4, and this package
 
 ``` bash
+$ apt install -y software-properties-common
+$ add-apt-repository ppa:jonathonf/ffmpeg-4
+$ apt update
+$ apt install -y ffmpeg
 $ pip install -e .
 ```
 
@@ -47,4 +56,4 @@ $ python audioset_augmentor/preprocess.py --help
 
 > The dataset is made available by Google Inc. under a Creative Commons Attribution 4.0 International (CC BY 4.0) license, while the ontology is available under a Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) license.
 
-- Other sources follow MIT License
+- Other sources are under MIT License

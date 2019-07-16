@@ -2,3 +2,4 @@ autoarg
 pandas
 youtube-dl
 librosa
+ffmpeg_normalize

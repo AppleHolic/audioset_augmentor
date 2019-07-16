@@ -27,7 +27,7 @@ setup(
     author_email='choiilji@gmail.com',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    keywords='audioset,sound,fl',
+    keywords='audioset,sound',
     packages=find_packages(),
     install_requires=get_requirements(),
     python_requires='>=3'
