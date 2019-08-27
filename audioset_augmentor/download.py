@@ -61,7 +61,8 @@ def time_formatter(meta_item, allowed_playtime: float = 10.0) -> Tuple[str, str]
 
 def download_partial_audio(args: Tuple[pd.Series, str]):
     # get youtube id
-    item, savedir = args
+    item_tuple, savedir = args
+    item = item_tuple[1]
     id_ = item['YTID']
 
     try:
