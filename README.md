@@ -32,14 +32,14 @@ $ pip install -e .
   - default : balanced
 
 ``` bash
-$ python audioset_augmentor/download.py --help
+$ python audioset_augmentor/download.py [--file_path='assets/balanced_train_segments.csv' --savedir='.data' --n_jobs=4 --delay=0.05]
 ```
 
 - Preprocess Audio
   - Process adjust volume, sample rate, file type on audio files.
 
 ``` bash
-$ python audioset_augmentor/preprocess.py --help
+$ python audioset_augmentor/preprocess.py [--master_dir, --out_dir, --meta_path='assets/balanced_train_segments.csv' --out_sr=22050 --min_size=1000000(file checker) --n_jobs=4]
 ```
 
 - After all, you should set master_dir on assets/default.json for using augment function.

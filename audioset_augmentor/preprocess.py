@@ -1,10 +1,11 @@
 import os
 import fire
 import json
+
 from ffmpeg_normalize import FFmpegNormalize
 from typing import Dict, Any, List, Tuple
-
-from audioset_augmentor.commons import do_multiprocess
+from tqdm import tqdm
+from joblib import Parallel, delayed
 from audioset_augmentor.download import get_audio_info
 
 
@@ -48,8 +49,7 @@ def get_human_ids(root_id: str = '/m/0dgw9r') -> List[str]:
     return list(set(ids))
 
 
-def worker(args: Tuple[str, str], out_sr: int = 22050, min_size: int = 1000000):
-    in_path, out_path = args
+def worker(in_path: str, out_path: str, out_sr: int, min_size: int):
     # filter
     if not os.path.exists(in_path):
         return
@@ -60,7 +60,8 @@ def worker(args: Tuple[str, str], out_sr: int = 22050, min_size: int = 1000000):
     norm.run_normalization()
 
 
-def main(master_dir: str, out_dir: str, meta_path: str = 'assets/balanced_train_segments.csv'):
+def main(master_dir: str, out_dir: str, meta_path: str = 'assets/balanced_train_segments.csv',
+         out_sr: int = 22050, min_size: int = 1000000, n_jobs: int = 4):
     # load config
     meta_info = get_audio_info(meta_path)
 
@@ -83,7 +84,9 @@ def main(master_dir: str, out_dir: str, meta_path: str = 'assets/balanced_train_
         args_list.append((in_path, out_path))
 
     # do multi-proc preprocess
-    do_multiprocess(worker, args_list, num_proc=8, delay=None)
+    Parallel(n_jobs=n_jobs)(
+        delayed(worker)(in_path, out_path, out_sr, min_size) for in_path, out_path in tqdm(args_list)
+    )
 
 
 if __name__ == '__main__':
