@@ -1,11 +1,12 @@
 import fire
 import pandas as pd
 import os
+import time
 
-from itertools import repeat
-from typing import Tuple
 from youtube_dl import YoutubeDL
-from audioset_augmentor.commons import do_multiprocess
+from tqdm import tqdm
+from typing import Tuple
+from joblib import Parallel, delayed
 
 
 def youtube_url_bone(yt_id: str) -> str:
@@ -59,9 +60,8 @@ def time_formatter(meta_item, allowed_playtime: float = 10.0) -> Tuple[str, str]
     return formatter(hours, minutes, seconds), formatter(0, 0, playtime)
 
 
-def download_partial_audio(args: Tuple[pd.Series, str]):
+def download_partial_audio(item_tuple: Tuple, savedir: str, delay: float):
     # get youtube id
-    item_tuple, savedir = args
     item = item_tuple[1]
     id_ = item['YTID']
 
@@ -83,9 +83,11 @@ def download_partial_audio(args: Tuple[pd.Series, str]):
     except Exception:
         print('Maybe download error')
 
+    time.sleep(delay)
+
 
 def main(file_path: str = 'assets/balanced_train_segments.csv', savedir: str = '.data',
-         num_proc: int = 4, delay: float = 0.05, multiply: int = 1):
+         n_jobs: int = 4, delay: float = 0.05):
     # makedir
     os.makedirs(savedir, exist_ok=True)
 
@@ -93,12 +95,8 @@ def main(file_path: str = 'assets/balanced_train_segments.csv', savedir: str = '
     print('Parse audio information ...')
     item = get_audio_info(file_path)
 
-    # to list
-    print('Make arguments ...')
-    item_list = list(zip(list(item.iterrows()), repeat(savedir, times=len(item))))
-
     # download with multi process
-    do_multiprocess(download_partial_audio, item_list, num_proc=num_proc, delay=delay, multiply=multiply)
+    Parallel(n_jobs=n_jobs)(delayed(download_partial_audio)(row, savedir, delay) for row in tqdm(item.iterrows()))
     print('Finish !')
 
 
