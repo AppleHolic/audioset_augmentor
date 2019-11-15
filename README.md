@@ -1,7 +1,6 @@
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FAppleHolic%2Faudioset_augmentor)](https://hits.seeyoufarm.com)
 
 
-
 ### Audio Augmentation using AudioSet
 
 - AudioSet
@@ -11,7 +10,9 @@
 - Goal
   - Augment with various sound situation for speech related tasks.
 
-- Few things gonna be fixed on source...
+### Noice
+
+I got a *degrading quality* on source separation case. So, I recommend checking data quality of audioset.
 
 
 #### How to Use
