@@ -10,10 +10,10 @@
 - Goal
   - Augment with various sound situation for speech related tasks.
 
-### Noice
+### Notice
 
-I got a *degrading quality* on source separation case. So, I recommend checking data quality of audioset.
-
+~I got a *degrading quality* on source separation case. So, I recommend checking data quality of audioset.~
+I will compare and report with evaluation loss, score. Before than, it print out warnings.
 
 #### How to Use
 
