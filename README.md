@@ -10,10 +10,11 @@
 - Goal
   - Augment with various sound situation for speech related tasks.
 
-### Notice
-
-~I got a *degrading quality* on source separation case. So, I recommend checking data quality of audioset.~
-I will compare and report with evaluation loss, score. Before than, it print out warnings.
+- Report on research case 
+  - If you wanna study on specific dataset, it can be not effects for getting better result.
+    - In [source separation](https://github.com/appleholic/source_separation) case, it gets higher losses with audioset augmentation. 
+  - But it gets better result on test cases.
+  
 
 #### How to Use
 
