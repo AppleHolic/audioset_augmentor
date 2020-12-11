@@ -15,7 +15,7 @@ def youtube_url_bone(yt_id: str) -> str:
 
 def choose_hid_url(meta_info, min_bit_rate: int = 32) -> str:
     # select audio format only
-    meta_info = [item for item in meta_info if 'audio' in item['format_note']]
+    meta_info = [item for item in meta_info if 'abr' in item]
 
     # filter minimum bit rate
     meta_info = [item for item in meta_info if item['abr'] >= min_bit_rate]
@@ -96,7 +96,7 @@ def main(file_path: str = 'assets/balanced_train_segments.csv', savedir: str = '
     item = get_audio_info(file_path)
 
     # download with multi process
-    Parallel(n_jobs=n_jobs)(delayed(download_partial_audio)(row, savedir, delay) for row in tqdm(item.iterrows()))
+    Parallel(n_jobs=n_jobs)(delayed(download_partial_audio)(row, savedir, delay) for row in tqdm(list(item.iterrows())))
     print('Finish !')
 
 
