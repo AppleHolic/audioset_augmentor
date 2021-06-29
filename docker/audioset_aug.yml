@@ -1,0 +1,13 @@
+name: audioset_aug
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - youtube-dl
+  - fire
+  - librosa
+  - pandas
+  - ffmpeg
+  - pip
+  - pip:
+    - ffmpeg_normalize

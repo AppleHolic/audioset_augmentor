@@ -29,6 +29,14 @@ $ apt install -y ffmpeg
 $ pip install -e .
 ```
 
+- Alternate Installation
+  - Using docker container with all the dependencies
+
+``` bash
+$ make build-docker
+$ make start-docker
+```
+
 - Download
   - Audioset give us separated meta information that label balanced or not.
   - default : balanced
